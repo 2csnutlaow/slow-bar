@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Lato } from "next/font/google";
+import { Syne, Nunito } from "next/font/google";
 import "./globals.css";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const syne = Syne({
+  variable: "--font-syne",
   subsets: ["latin"],
   display: "swap",
 });
 
-const lato = Lato({
-  variable: "--font-lato",
+const nunito = Nunito({
+  variable: "--font-nunito",
   subsets: ["latin"],
-  weight: ["300", "400", "700"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html
       lang="th"
-      className={`${playfair.variable} ${lato.variable} scroll-smooth`}
+      className={`${syne.variable} ${nunito.variable} scroll-smooth`}
     >
       <body className="antialiased">{children}</body>
     </html>

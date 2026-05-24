@@ -1,188 +1,573 @@
+const SYNE = "var(--font-syne)";
+const NUNITO = "var(--font-nunito)";
+
 const menuItems = [
   {
+    num: "01",
     name: "Espresso",
     description: "กาแฟเข้มข้น หอมกรุ่น สกัดจากเมล็ดคัดพิเศษ",
     price: "฿65",
-    icon: "☕",
+    tag: "Single Origin",
   },
   {
+    num: "02",
     name: "Signature Latte",
     description: "เอสเปรสโซ่ผสมนมสด ตกแต่งลายนมละเอียด",
     price: "฿95",
-    icon: "🥛",
+    tag: "House Blend",
   },
   {
+    num: "03",
     name: "Pour Over",
     description: "กาแฟดริปช้า ๆ ดึงรสชาติทุกมิติออกมาให้คุณ",
     price: "฿110",
-    icon: "🫖",
+    tag: "Slow Method",
   },
   {
+    num: "04",
     name: "Cold Brew",
     description: "แช่เย็น 18 ชั่วโมง เข้มข้น นุ่มนวล ไม่ขม",
     price: "฿90",
-    icon: "🧊",
+    tag: "18 Hrs Cold",
   },
 ];
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#fdf0f5] text-[#3d1220]">
-      {/* Navbar */}
-      <nav className="fixed top-0 z-50 w-full bg-[#fdf0f5]/90 backdrop-blur-sm border-b border-[#f0d0dc]">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+    <div style={{ background: "var(--off-white)", color: "var(--dark)" }}>
+      {/* ── Navigation ── */}
+      <nav
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 50,
+          background: "var(--hot)",
+          borderBottom: "1px solid rgba(255,255,255,0.15)",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "80rem",
+            margin: "0 auto",
+            padding: "1.1rem 2rem",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
           <span
-            style={{ fontFamily: "var(--font-playfair)" }}
-            className="text-xl font-bold tracking-wide text-[#8b2252]"
+            style={{
+              fontFamily: SYNE,
+              fontWeight: 800,
+              fontSize: "1.35rem",
+              letterSpacing: "0.08em",
+              color: "white",
+              textTransform: "uppercase",
+            }}
           >
             Slow Bar
           </span>
-          <div className="hidden gap-8 text-sm font-light tracking-widest text-[#b05678] sm:flex">
-            <a href="#about" className="hover:text-[#8b2252] transition-colors">
-              เกี่ยวกับเรา
-            </a>
-            <a href="#menu" className="hover:text-[#8b2252] transition-colors">
-              เมนู
-            </a>
-            <a
-              href="#contact"
-              className="hover:text-[#8b2252] transition-colors"
-            >
-              ติดต่อ
-            </a>
+
+          <div
+            style={{
+              fontFamily: SYNE,
+              fontSize: "0.58rem",
+              letterSpacing: "0.45em",
+              color: "rgba(255,255,255,0.55)",
+              textTransform: "uppercase",
+            }}
+            className="hidden sm:block"
+          >
+            Specialty Coffee · Chiang Mai
+          </div>
+
+          <div className="hidden sm:flex" style={{ gap: "2rem" }}>
+            {(
+              [
+                ["เกี่ยวกับเรา", "#about"],
+                ["เมนู", "#menu"],
+                ["ติดต่อ", "#contact"],
+              ] as const
+            ).map(([label, href]) => (
+              <a key={href} href={href} className="nav-link">
+                {label}
+              </a>
+            ))}
           </div>
         </div>
       </nav>
 
-      {/* Hero */}
+      {/* ── Hero ── */}
       <section
         id="hero"
-        className="relative flex min-h-screen flex-col items-center justify-center px-6 text-center"
         style={{
+          minHeight: "100vh",
           background:
-            "linear-gradient(160deg, #fdf0f5 0%, #fce0ea 60%, #f5ccd9 100%)",
+            "radial-gradient(ellipse at 20% 80%, #FF4090 0%, #FF1868 35%, #D40E55 75%, #A80A43 100%)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "8rem 2rem 5rem",
+          position: "relative",
+          overflow: "hidden",
+          textAlign: "center",
         }}
       >
-        {/* Decorative rings */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[420px] w-[420px] rounded-full border border-[#d4879a]/20 sm:h-[560px] sm:w-[560px]" />
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[320px] w-[320px] rounded-full border border-[#d4879a]/10 sm:h-[440px] sm:w-[440px]" />
+        {/* Floating circles */}
+        <div
+          aria-hidden="true"
+          className="float-a"
+          style={{
+            position: "absolute",
+            top: "-8%",
+            left: "-6%",
+            width: "clamp(300px, 40vw, 560px)",
+            height: "clamp(300px, 40vw, 560px)",
+            borderRadius: "50%",
+            background: "rgba(255,255,255,0.07)",
+            pointerEvents: "none",
+          }}
+        />
+        <div
+          aria-hidden="true"
+          className="float-b"
+          style={{
+            position: "absolute",
+            bottom: "-10%",
+            right: "-5%",
+            width: "clamp(240px, 32vw, 480px)",
+            height: "clamp(240px, 32vw, 480px)",
+            borderRadius: "50%",
+            background: "rgba(255,255,255,0.06)",
+            pointerEvents: "none",
+          }}
+        />
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            top: "18%",
+            right: "12%",
+            width: "clamp(120px, 16vw, 240px)",
+            height: "clamp(120px, 16vw, 240px)",
+            borderRadius: "50%",
+            border: "1px solid rgba(255,255,255,0.2)",
+            pointerEvents: "none",
+          }}
+        />
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            bottom: "22%",
+            left: "8%",
+            width: "clamp(60px, 8vw, 120px)",
+            height: "clamp(60px, 8vw, 120px)",
+            borderRadius: "50%",
+            border: "2px solid rgba(255,255,255,0.25)",
+            pointerEvents: "none",
+          }}
+        />
 
-        <div className="relative z-10 max-w-2xl">
-          <p className="mb-4 text-xs font-light tracking-[0.4em] text-[#d4879a] uppercase">
-            Specialty Coffee
-          </p>
-          <h1
-            style={{ fontFamily: "var(--font-playfair)" }}
-            className="mb-6 text-6xl font-bold leading-tight text-[#3d1220] sm:text-8xl"
+        {/* Spinning ring */}
+        <div
+          aria-hidden="true"
+          className="spin-slow"
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "min(90vw, 720px)",
+            height: "min(90vw, 720px)",
+            borderRadius: "50%",
+            border: "1px solid rgba(255,255,255,0.06)",
+            pointerEvents: "none",
+          }}
+        />
+
+        {/* Badge */}
+        <div
+          className="animate-up"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            background: "rgba(255,255,255,0.15)",
+            border: "1px solid rgba(255,255,255,0.35)",
+            borderRadius: "9999px",
+            padding: "0.45rem 1.4rem",
+            fontFamily: SYNE,
+            fontWeight: 600,
+            fontSize: "0.62rem",
+            letterSpacing: "0.35em",
+            color: "white",
+            textTransform: "uppercase",
+            marginBottom: "2.25rem",
+            animationDelay: "0.05s",
+          }}
+        >
+          ✦ Specialty Coffee ✦
+        </div>
+
+        {/* Title */}
+        <h1
+          className="animate-up"
+          style={{
+            fontFamily: SYNE,
+            fontWeight: 800,
+            fontSize: "clamp(5.5rem, 20vw, 20rem)",
+            lineHeight: 0.88,
+            letterSpacing: "0.04em",
+            color: "white",
+            margin: 0,
+            textTransform: "uppercase",
+            animationDelay: "0.15s",
+          }}
+        >
+          Slow
+        </h1>
+        <h1
+          className="animate-up"
+          style={{
+            fontFamily: SYNE,
+            fontWeight: 800,
+            fontSize: "clamp(5.5rem, 20vw, 20rem)",
+            lineHeight: 0.88,
+            letterSpacing: "0.04em",
+            color: "white",
+            margin: "0 0 2.25rem",
+            textTransform: "uppercase",
+            animationDelay: "0.25s",
+          }}
+        >
+          Bar
+        </h1>
+
+        {/* Divider */}
+        <div
+          className="animate-up"
+          style={{
+            width: "clamp(80px, 12vw, 160px)",
+            height: "2px",
+            background: "rgba(255,255,255,0.4)",
+            marginBottom: "2rem",
+            borderRadius: "9999px",
+            animationDelay: "0.38s",
+          }}
+        />
+
+        {/* Tagline */}
+        <div
+          className="animate-up"
+          style={{ animationDelay: "0.48s", marginBottom: "2.75rem" }}
+        >
+          <p
+            style={{
+              fontFamily: NUNITO,
+              fontWeight: 300,
+              fontSize: "clamp(1rem, 2.2vw, 1.25rem)",
+              lineHeight: 1.9,
+              color: "rgba(255,255,255,0.88)",
+              margin: 0,
+            }}
           >
-            Slow Bar
-          </h1>
-          <p className="mb-2 text-lg font-light leading-relaxed text-[#7a3050] sm:text-xl">
-            ในโลกที่เร่งรีบ — ให้กาแฟดี ๆ
+            ในโลกที่เร่งรีบ — ให้กาแฟดี ๆ ชะลอเวลาไว้สักครู่
           </p>
-          <p className="mb-10 text-lg font-light leading-relaxed text-[#7a3050] sm:text-xl">
-            ชะลอเวลาไว้สักครู่
-          </p>
-          <a
-            href="#menu"
-            className="inline-block rounded-full bg-[#8b2252] px-10 py-4 text-sm font-light tracking-[0.2em] text-[#fdf0f5] transition-all hover:bg-[#3d1220] hover:shadow-lg hover:shadow-[#8b2252]/30 uppercase"
-          >
-            ดูเมนู
+        </div>
+
+        {/* CTA */}
+        <div
+          className="animate-up"
+          style={{ animationDelay: "0.6s" }}
+        >
+          <a href="#menu" className="hero-cta" style={{ fontFamily: SYNE }}>
+            ดูเมนู <span>↓</span>
           </a>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[#d4879a]">
-          <span className="text-xs tracking-widest">scroll</span>
-          <div className="h-8 w-px bg-gradient-to-b from-[#c4956a] to-transparent" />
+        {/* Scroll hint */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: "2rem",
+            left: "50%",
+            transform: "translateX(-50%)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "0.4rem",
+          }}
+        >
+          <div
+            style={{
+              width: "1px",
+              height: "40px",
+              background:
+                "linear-gradient(to bottom, rgba(255,255,255,0.5), transparent)",
+            }}
+          />
         </div>
       </section>
 
-      {/* About */}
-      <section id="about" className="px-6 py-24 sm:py-32">
-        <div className="mx-auto max-w-3xl">
-          <div className="mb-12 flex items-center gap-4">
-            <div className="h-px flex-1 bg-[#f0d0dc]" />
-            <p className="text-xs tracking-[0.4em] text-[#d4879a] uppercase">
-              Our Story
-            </p>
-            <div className="h-px flex-1 bg-[#f0d0dc]" />
-          </div>
-
-          <h2
-            style={{ fontFamily: "var(--font-playfair)" }}
-            className="mb-8 text-center text-4xl font-bold text-[#8b2252] sm:text-5xl"
-          >
-            เกี่ยวกับเรา
-          </h2>
-
-          <div className="mx-auto max-w-xl space-y-5 text-center text-base font-light leading-8 text-[#7a3050]">
-            <p>
-              Slow Bar เกิดจากความเชื่อว่ากาแฟหนึ่งแก้วควรเป็นมากกว่าแค่
-              คาเฟอีน — มันคือช่วงเวลา เป็นพิธีกรรมเล็ก ๆ
-              ที่ให้คุณได้หยุดหายใจ
-            </p>
-            <p>
-              เราคัดสรรเมล็ดกาแฟจากไร่เล็ก ๆ ในประเทศไทยและเอเชีย
-              คั่วโดยช่างคั่วมือฉมัง แล้วส่งมอบความดีของมัน
-              ผ่านมือบาริสต้าที่รักในสิ่งที่ทำ
-            </p>
-            <p>
-              ไม่ว่าคุณจะมาคนเดียวพร้อมหนังสือ หรือมากับเพื่อนสนิท
-              Slow Bar พร้อมต้อนรับเสมอ
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Menu */}
+      {/* ── About ── */}
       <section
-        id="menu"
-        className="px-6 py-24 sm:py-32"
+        id="about"
         style={{
-          background:
-            "linear-gradient(180deg, #fce0ea 0%, #f5ccd9 100%)",
+          background: "var(--off-white)",
+          padding: "7rem 2rem",
         }}
       >
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-12 flex items-center gap-4">
-            <div className="h-px flex-1 bg-[#d4879a]/40" />
-            <p className="text-xs tracking-[0.4em] text-[#d4879a] uppercase">
-              Our Menu
-            </p>
-            <div className="h-px flex-1 bg-[#d4879a]/40" />
+        <div style={{ maxWidth: "72rem", margin: "0 auto" }}>
+          {/* Label pill */}
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              background: "var(--pale)",
+              borderRadius: "9999px",
+              padding: "0.35rem 1.1rem",
+              fontFamily: SYNE,
+              fontWeight: 700,
+              fontSize: "0.6rem",
+              letterSpacing: "0.3em",
+              color: "var(--hot)",
+              textTransform: "uppercase",
+              marginBottom: "2.5rem",
+            }}
+          >
+            Our Story
+          </div>
+
+          <div
+            style={{
+              display: "grid",
+              gap: "3rem 5rem",
+            }}
+            className="lg:grid-cols-[auto_1fr]"
+          >
+            {/* Heading */}
+            <h2
+              style={{
+                fontFamily: SYNE,
+                fontWeight: 800,
+                fontSize: "clamp(3rem, 7vw, 7rem)",
+                lineHeight: 0.95,
+                letterSpacing: "0.02em",
+                textTransform: "uppercase",
+                color: "var(--hot)",
+                margin: 0,
+              }}
+            >
+              เกี่ยว
+              <br />
+              กับเรา
+            </h2>
+
+            {/* Body */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "1.5rem",
+                maxWidth: "38rem",
+                alignSelf: "center",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: NUNITO,
+                  fontSize: "1.05rem",
+                  fontWeight: 600,
+                  lineHeight: 1.7,
+                  color: "var(--dark)",
+                  margin: 0,
+                }}
+              >
+                Slow Bar เกิดจากความเชื่อว่ากาแฟหนึ่งแก้วควรเป็นมากกว่าแค่คาเฟอีน
+                — มันคือช่วงเวลา เป็นพิธีกรรมเล็ก ๆ ที่ให้คุณได้หยุดหายใจ
+              </p>
+              <p
+                style={{
+                  fontFamily: NUNITO,
+                  fontSize: "0.95rem",
+                  fontWeight: 400,
+                  lineHeight: 1.85,
+                  color: "var(--dark-mid)",
+                  margin: 0,
+                }}
+              >
+                เราคัดสรรเมล็ดกาแฟจากไร่เล็ก ๆ ในประเทศไทยและเอเชีย
+                คั่วโดยช่างคั่วมือฉมัง แล้วส่งมอบความดีของมัน
+                ผ่านมือบาริสต้าที่รักในสิ่งที่ทำ
+              </p>
+              <p
+                style={{
+                  fontFamily: NUNITO,
+                  fontSize: "0.95rem",
+                  fontWeight: 400,
+                  lineHeight: 1.85,
+                  color: "var(--dark-mid)",
+                  margin: 0,
+                }}
+              >
+                ไม่ว่าคุณจะมาคนเดียวพร้อมหนังสือ หรือมากับเพื่อนสนิท
+                Slow Bar พร้อมต้อนรับเสมอ
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Menu ── */}
+      <section
+        id="menu"
+        style={{
+          background:
+            "radial-gradient(ellipse at 80% 20%, #FF4090 0%, #FF1868 50%, #D40E55 100%)",
+          padding: "7rem 2rem",
+        }}
+      >
+        <div style={{ maxWidth: "72rem", margin: "0 auto" }}>
+          {/* Label pill */}
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              background: "rgba(255,255,255,0.18)",
+              border: "1px solid rgba(255,255,255,0.35)",
+              borderRadius: "9999px",
+              padding: "0.35rem 1.1rem",
+              fontFamily: SYNE,
+              fontWeight: 700,
+              fontSize: "0.6rem",
+              letterSpacing: "0.3em",
+              color: "white",
+              textTransform: "uppercase",
+              marginBottom: "2.5rem",
+            }}
+          >
+            Our Menu
           </div>
 
           <h2
-            style={{ fontFamily: "var(--font-playfair)" }}
-            className="mb-14 text-center text-4xl font-bold text-[#8b2252] sm:text-5xl"
+            style={{
+              fontFamily: SYNE,
+              fontWeight: 800,
+              fontSize: "clamp(2.8rem, 6vw, 6rem)",
+              letterSpacing: "0.02em",
+              textTransform: "uppercase",
+              color: "white",
+              margin: "0 0 3.5rem",
+              lineHeight: 1,
+            }}
           >
             เมนูแนะนำ
           </h2>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {/* Card grid */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              gap: "1.5rem",
+            }}
+          >
             {menuItems.map((item) => (
               <div
                 key={item.name}
-                className="group flex flex-col rounded-2xl bg-[#fdf0f5] p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:shadow-[#d4879a]/20"
+                className="menu-card"
+                style={{ padding: "1.75rem", display: "flex", flexDirection: "column" }}
               >
-                <div className="mb-5 text-4xl">{item.icon}</div>
+                {/* Number + tag row */}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginBottom: "1.5rem",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontFamily: SYNE,
+                      fontWeight: 700,
+                      fontSize: "0.65rem",
+                      letterSpacing: "0.2em",
+                      color: "var(--hot)",
+                    }}
+                  >
+                    {item.num}
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: NUNITO,
+                      fontSize: "0.6rem",
+                      fontWeight: 600,
+                      letterSpacing: "0.1em",
+                      textTransform: "uppercase",
+                      color: "rgba(26,0,16,0.38)",
+                      background: "var(--pale)",
+                      borderRadius: "9999px",
+                      padding: "0.2rem 0.75rem",
+                    }}
+                  >
+                    {item.tag}
+                  </span>
+                </div>
+
+                {/* Name */}
                 <h3
-                  style={{ fontFamily: "var(--font-playfair)" }}
-                  className="mb-2 text-lg font-bold text-[#8b2252]"
+                  style={{
+                    fontFamily: SYNE,
+                    fontWeight: 700,
+                    fontSize: "1.3rem",
+                    color: "var(--dark)",
+                    margin: "0 0 0.6rem",
+                    lineHeight: 1.2,
+                  }}
                 >
                   {item.name}
                 </h3>
-                <p className="mb-6 flex-1 text-sm font-light leading-relaxed text-[#b05678]">
+
+                {/* Description */}
+                <p
+                  style={{
+                    fontFamily: NUNITO,
+                    fontSize: "0.82rem",
+                    fontWeight: 400,
+                    lineHeight: 1.7,
+                    color: "var(--dark-mid)",
+                    margin: "0 0 1.5rem",
+                    flex: 1,
+                  }}
+                >
                   {item.description}
                 </p>
-                <div className="flex items-center justify-between border-t border-[#f0d0dc] pt-4">
-                  <span className="text-xs tracking-widest text-[#d4879a] uppercase">
-                    price
-                  </span>
+
+                {/* Divider + price */}
+                <div
+                  style={{
+                    borderTop: "1px solid var(--pale)",
+                    paddingTop: "1rem",
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    alignItems: "baseline",
+                  }}
+                >
                   <span
-                    style={{ fontFamily: "var(--font-playfair)" }}
-                    className="text-xl font-bold text-[#8b2252]"
+                    style={{
+                      fontFamily: SYNE,
+                      fontWeight: 800,
+                      fontSize: "1.7rem",
+                      color: "var(--hot)",
+                      lineHeight: 1,
+                    }}
                   >
                     {item.price}
                   </span>
@@ -193,34 +578,89 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact */}
-      <section id="contact" className="px-6 py-24 sm:py-32">
-        <div className="mx-auto max-w-3xl">
-          <div className="mb-12 flex items-center gap-4">
-            <div className="h-px flex-1 bg-[#f0d0dc]" />
-            <p className="text-xs tracking-[0.4em] text-[#d4879a] uppercase">
-              Find Us
-            </p>
-            <div className="h-px flex-1 bg-[#f0d0dc]" />
+      {/* ── Contact ── */}
+      <section
+        id="contact"
+        style={{
+          background: "var(--off-white)",
+          padding: "7rem 2rem",
+        }}
+      >
+        <div style={{ maxWidth: "72rem", margin: "0 auto" }}>
+          {/* Label pill */}
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              background: "var(--pale)",
+              borderRadius: "9999px",
+              padding: "0.35rem 1.1rem",
+              fontFamily: SYNE,
+              fontWeight: 700,
+              fontSize: "0.6rem",
+              letterSpacing: "0.3em",
+              color: "var(--hot)",
+              textTransform: "uppercase",
+              marginBottom: "2.5rem",
+            }}
+          >
+            Find Us
           </div>
 
           <h2
-            style={{ fontFamily: "var(--font-playfair)" }}
-            className="mb-14 text-center text-4xl font-bold text-[#8b2252] sm:text-5xl"
+            style={{
+              fontFamily: SYNE,
+              fontWeight: 800,
+              fontSize: "clamp(2.8rem, 6vw, 6rem)",
+              letterSpacing: "0.02em",
+              textTransform: "uppercase",
+              color: "var(--hot)",
+              margin: "0 0 4rem",
+              lineHeight: 1,
+            }}
           >
             มาหาเรา
           </h2>
 
-          <div className="grid gap-10 sm:grid-cols-3">
+          <div
+            style={{
+              display: "grid",
+              gap: "2rem",
+            }}
+            className="sm:grid-cols-3"
+          >
             {/* Address */}
-            <div className="flex flex-col items-center text-center">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#fce0ea] text-xl">
-                📍
-              </div>
-              <h3 className="mb-3 text-xs font-bold tracking-[0.2em] text-[#8b2252] uppercase">
+            <div
+              style={{
+                background: "var(--pale)",
+                borderRadius: "20px",
+                padding: "2rem 1.75rem",
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: SYNE,
+                  fontWeight: 700,
+                  fontSize: "0.62rem",
+                  letterSpacing: "0.28em",
+                  color: "var(--hot)",
+                  textTransform: "uppercase",
+                  marginBottom: "1rem",
+                }}
+              >
                 ที่อยู่
-              </h3>
-              <p className="text-sm font-light leading-7 text-[#7a3050]">
+              </div>
+              <p
+                style={{
+                  fontFamily: NUNITO,
+                  fontSize: "0.9rem",
+                  fontWeight: 500,
+                  lineHeight: 2,
+                  color: "var(--dark)",
+                  margin: 0,
+                }}
+              >
                 123 ถนนนิมมานเหมินท์
                 <br />
                 ซอย 7 ห้องมุม
@@ -230,14 +670,36 @@ export default function Home() {
             </div>
 
             {/* Hours */}
-            <div className="flex flex-col items-center text-center">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#fce0ea] text-xl">
-                🕐
-              </div>
-              <h3 className="mb-3 text-xs font-bold tracking-[0.2em] text-[#8b2252] uppercase">
+            <div
+              style={{
+                background: "var(--pale)",
+                borderRadius: "20px",
+                padding: "2rem 1.75rem",
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: SYNE,
+                  fontWeight: 700,
+                  fontSize: "0.62rem",
+                  letterSpacing: "0.28em",
+                  color: "var(--hot)",
+                  textTransform: "uppercase",
+                  marginBottom: "1rem",
+                }}
+              >
                 เวลาเปิด-ปิด
-              </h3>
-              <p className="text-sm font-light leading-7 text-[#7a3050]">
+              </div>
+              <p
+                style={{
+                  fontFamily: NUNITO,
+                  fontSize: "0.9rem",
+                  fontWeight: 500,
+                  lineHeight: 2,
+                  color: "var(--dark)",
+                  margin: 0,
+                }}
+              >
                 จันทร์ – ศุกร์
                 <br />
                 08:00 – 18:00 น.
@@ -249,49 +711,95 @@ export default function Home() {
             </div>
 
             {/* Social */}
-            <div className="flex flex-col items-center text-center">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#fce0ea] text-xl">
-                💬
-              </div>
-              <h3 className="mb-3 text-xs font-bold tracking-[0.2em] text-[#8b2252] uppercase">
+            <div
+              style={{
+                background: "var(--pale)",
+                borderRadius: "20px",
+                padding: "2rem 1.75rem",
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: SYNE,
+                  fontWeight: 700,
+                  fontSize: "0.62rem",
+                  letterSpacing: "0.28em",
+                  color: "var(--hot)",
+                  textTransform: "uppercase",
+                  marginBottom: "1rem",
+                }}
+              >
                 ติดตามเรา
-              </h3>
-              <div className="flex flex-col gap-2 text-sm font-light">
-                <a
-                  href="https://instagram.com/slowbar.cafe"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#d4879a] transition-colors hover:text-[#8b2252]"
-                >
-                  Instagram
-                </a>
-                <a
-                  href="https://facebook.com/slowbar.cafe"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#d4879a] transition-colors hover:text-[#8b2252]"
-                >
-                  Facebook
-                </a>
-                <a
-                  href="https://line.me/slowbarcafe"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#d4879a] transition-colors hover:text-[#8b2252]"
-                >
-                  Line OA
-                </a>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                {[
+                  { label: "Instagram", href: "https://instagram.com/slowbar.cafe" },
+                  { label: "Facebook", href: "https://facebook.com/slowbar.cafe" },
+                  { label: "Line OA", href: "https://line.me/slowbarcafe" },
+                ].map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-link"
+                    style={{
+                      fontFamily: NUNITO,
+                      fontSize: "0.9rem",
+                      fontWeight: 600,
+                    }}
+                  >
+                    <span style={{ color: "var(--hot)", fontSize: "0.7rem" }}>↗</span>
+                    {s.label}
+                  </a>
+                ))}
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-[#f0d0dc] py-8 text-center">
-        <p className="text-xs font-light tracking-widest text-[#d4879a]">
-          © 2026 Slow Bar · All Rights Reserved
-        </p>
+      {/* ── Footer ── */}
+      <footer
+        style={{
+          background: "var(--hot)",
+          padding: "1.75rem 2rem",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "72rem",
+            margin: "0 auto",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <span
+            style={{
+              fontFamily: SYNE,
+              fontWeight: 800,
+              fontSize: "1.1rem",
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+              color: "rgba(255,255,255,0.55)",
+            }}
+          >
+            Slow Bar
+          </span>
+          <p
+            style={{
+              fontFamily: SYNE,
+              fontSize: "0.6rem",
+              letterSpacing: "0.3em",
+              color: "rgba(255,255,255,0.45)",
+              textTransform: "uppercase",
+              margin: 0,
+            }}
+          >
+            © 2026 · All Rights Reserved
+          </p>
+        </div>
       </footer>
     </div>
   );

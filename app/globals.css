@@ -1,21 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fdf0f5;
-  --foreground: #3d1220;
+  --hot: #FF1868;
+  --hot-dark: #D40E55;
+  --hot-deeper: #A80A43;
+  --off-white: #FFF8FA;
+  --pale: #FFE8F2;
+  --dark: #1A0010;
+  --dark-mid: #5C1838;
+  --white: #FFFFFF;
+  --border-light: rgba(255, 24, 104, 0.18);
+  --border-on-pink: rgba(255, 255, 255, 0.28);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-pink-light: #fdf0f5;
-  --color-pink-pale: #fce0ea;
-  --color-pink-soft: #f5ccd9;
-  --color-pink-mid: #d4879a;
-  --color-pink-deep: #8b2252;
-  --color-pink-dark: #3d1220;
-  --font-serif: var(--font-playfair);
-  --font-sans: var(--font-lato);
+  --color-hot: var(--hot);
+  --color-hot-dark: var(--hot-dark);
+  --color-off-white: var(--off-white);
+  --color-pale: var(--pale);
+  --color-dark: var(--dark);
+  --font-display: var(--font-syne);
+  --font-body: var(--font-nunito);
 }
 
 html {
@@ -23,7 +28,131 @@ html {
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-lato), Georgia, serif;
+  background: var(--off-white);
+  color: var(--dark);
+  font-family: var(--font-nunito), system-ui, sans-serif;
 }
+
+/* ── Keyframes ── */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes floatA {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50%      { transform: translateY(-22px) scale(1.015); }
+}
+
+@keyframes floatB {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50%      { transform: translateY(16px) scale(0.985); }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── Animation utilities ── */
+
+.animate-up {
+  animation: fadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-in {
+  animation: fadeIn 1s ease both;
+}
+
+.float-a { animation: floatA 7s ease-in-out infinite; }
+.float-b { animation: floatB 9s ease-in-out infinite; }
+.spin-slow { animation: spinSlow 22s linear infinite; }
+
+/* ── Nav links (on pink bg) ── */
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.78);
+  text-decoration: none;
+  transition: color 0.22s ease;
+  position: relative;
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.nav-link:hover { color: #ffffff; }
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.6);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after { width: 100%; }
+
+/* ── Hero CTA ── */
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--white);
+  color: var(--hot);
+  border-radius: 9999px;
+  padding: 1rem 2.25rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.28s ease, color 0.28s ease, transform 0.22s ease,
+    box-shadow 0.28s ease;
+  box-shadow: 0 4px 24px rgba(212, 14, 85, 0.25);
+}
+
+.hero-cta:hover {
+  background: var(--dark);
+  color: var(--white);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(26, 0, 16, 0.35);
+}
+
+/* ── Menu cards ── */
+
+.menu-card {
+  background: var(--white);
+  border-radius: 20px;
+  box-shadow: 0 4px 28px rgba(212, 14, 85, 0.12);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s ease;
+}
+
+.menu-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(212, 14, 85, 0.22);
+}
+
+/* ── Social links ── */
+
+.social-link {
+  color: var(--dark-mid);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.22s ease;
+}
+
+.social-link:hover { color: var(--hot); }
